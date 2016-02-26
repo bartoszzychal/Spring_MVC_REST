@@ -20,8 +20,18 @@ public class BookRestService {
         return bookService.findBooksByTitle(titlePrefix);
     }
 
-    @RequestMapping(value = "/book", method = RequestMethod.POST)
+    @RequestMapping(value = "/book", method = RequestMethod.POST, params="save")
     public BookTo saveBook(@RequestBody BookTo book) {
         return bookService.saveBook(book);
+    }
+    
+    @RequestMapping(value = "/book", method = RequestMethod.PATCH, params="update")
+    public BookTo updateBook(@RequestBody BookTo book) {
+    	return bookService.updateBook(book);
+    }
+    
+    @RequestMapping(value = "/book", method = RequestMethod.DELETE, params="delete")
+    public BookTo deleteBook(@RequestBody BookTo book) {
+    	return bookService.deleteBook(book);
     }
 }
