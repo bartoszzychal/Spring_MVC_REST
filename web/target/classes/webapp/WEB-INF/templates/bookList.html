@@ -3,27 +3,35 @@
 <head lang="en">
 <meta charset="UTF-8" />
 <title>Lista książek</title>
+<link rel="stylesheet" th:href="@{/static/application.css}"
+	href="/static/application.css" />
 </head>
 <body>
-	<table border="1">
-		<tr>
-			<td>id</td>
-			<td>title</td>
-			<td>authors</td>
-		</tr>
-		<div th:each="book : ${books}">
+	<table id="table_style">
+		<thead>
 			<tr>
-				<td th:text="${book.id}">id</td>
-				<td th:text="${book.title}">title</td>
-				<td th:text="${book.authors}">authors</td>
-				<td>
-					<form action="#" data-th-action="@{'/deleteBook'(id=${book.id})}" method="post">
-						<button type="submit" name="action" value="delete">delete</button>
-					</form>
-				</td>
-
+				<th scope="col">ID</th>
+				<th scope="col">TITLE</th>
+				<th scope="col">AUTHORS</th>
+				<th scope="col">DELETE</th>
 			</tr>
+		</thead>
+		<tbody>
+		<div th:each="book : ${books}">
+		<tr>
+			<td class="center" th:text="${book.id}">id</td>
+			<td class="center" th:text="${book.title}">title</td>
+			<td class="center" th:text="${book.authors}">authors</td>
+			<td>
+				<form action="#" data-th-action="@{'/deleteBook'(id=${book.id})}"
+					method="post">
+					<button type="submit" name="action" value="delete">Delete book</button>
+				</form>
+			</td>
+
+		</tr>
 		</div>
+		</tbody>
 	</table>
 
 </body>
