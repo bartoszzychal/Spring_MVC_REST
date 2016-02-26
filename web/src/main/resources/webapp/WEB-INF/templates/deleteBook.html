@@ -6,9 +6,9 @@
     <link rel="stylesheet" th:href="@{/static/application.css}" href="/static/application.css" />
 </head>
 <body>
-    <p class="sample" th:inline="text">Książka o tytule "[[${title}]]" została usunięta.</p>
+    <p id="delete_alert" th:inline="text">Książka o tytule "[[${title}]]" została usunięta.</p>
     <form action="#" data-th-action="@{/books}" method="get">
-			<button type="submit" name="view" value="bookList">Return to book's list</button>
+			<button id="return_button" type="submit" name="view" value="bookList">Return to book's list</button>
 	</form>
 </body>
 </html>
