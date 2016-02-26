@@ -1,12 +1,12 @@
 package pl.spring.demo.web.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import pl.spring.demo.to.BookTo;
 
-import java.awt.print.Book;
-import java.util.Map;
+import pl.spring.demo.to.BookTo;
 
 @Controller
 public class SimpleController {
