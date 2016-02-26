@@ -1,5 +1,13 @@
 package pl.spring.demo.web.rest;
 
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.io.File;
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,18 +21,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
 import pl.spring.demo.service.BookService;
 import pl.spring.demo.to.BookTo;
 import pl.spring.demo.web.utils.FileUtils;
-
-import java.io.File;
-import java.util.Arrays;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
@@ -77,12 +77,57 @@ public class BookRestServiceTest {
         // given
         File file = FileUtils.getFileFromClasspath("classpath:pl/spring/demo/web/json/bookToSave.json");
         String json = FileUtils.readFileToString(file);
+    	BookTo bookTo = new BookTo(5L, "Piąta książka", "Zbigniew Nowak");
+    	Mockito.when(bookService.saveBook(bookTo)).thenReturn(bookTo);
         // when
-        ResultActions response = this.mockMvc.perform(post("/book")
+        ResultActions response = this.mockMvc.perform(post("/book").param("save", "" )
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json.getBytes()));
         // then
-        response.andExpect(status().isOk());
+    	Mockito.verify(bookService).saveBook(bookTo);
+        response.andExpect(status().isOk())
+        	.andExpect(jsonPath("id").value(bookTo.getId().intValue()))
+        	.andExpect(jsonPath("title").value(bookTo.getTitle()))
+        	.andExpect(jsonPath("authors").value(bookTo.getAuthors()));
+    }
+    @Test
+    public void testShouldDeleteBook() throws Exception {
+    	// given
+    	File file = FileUtils.getFileFromClasspath("classpath:pl/spring/demo/web/json/bookToDelete.json");
+    	String json = FileUtils.readFileToString(file);
+    	BookTo bookTo = new BookTo(2L, "Druga książka", "Zbigniew Nowak");
+    	// when
+    	Mockito.when(bookService.deleteBook(bookTo)).thenReturn(bookTo);
+    	ResultActions response = this.mockMvc.perform(delete("/book").param("delete", "" )
+    			.accept(MediaType.APPLICATION_JSON)
+    			.contentType(MediaType.APPLICATION_JSON)
+    			.content(json.getBytes()));
+    	// then
+    	Mockito.verify(bookService).deleteBook(bookTo);
+    	response.andExpect(status().isOk())
+    		.andExpect(jsonPath("id").value(bookTo.getId().intValue()))
+    		.andExpect(jsonPath("title").value(bookTo.getTitle()))
+    		.andExpect(jsonPath("authors").value(bookTo.getAuthors()));
+    }
+    
+    @Test
+    public void testShouldUpdateBook() throws Exception {
+    	// given
+    	File file = FileUtils.getFileFromClasspath("classpath:pl/spring/demo/web/json/bookToUpdate.json");
+    	String json = FileUtils.readFileToString(file);
+    	BookTo bookTo = new BookTo(2L, "Druga książka", "Zbigniew Zbigniew");
+    	// when
+    	Mockito.when(bookService.updateBook(bookTo)).thenReturn(bookTo);
+    	ResultActions response = this.mockMvc.perform(patch("/book").param("update", "" )
+    			.accept(MediaType.APPLICATION_JSON)
+    			.contentType(MediaType.APPLICATION_JSON)
+    			.content(json.getBytes()));
+		// then
+    	Mockito.verify(bookService).updateBook(bookTo);
+    	response.andExpect(status().isOk()). 
+    		andExpect(jsonPath("id").value(bookTo.getId().intValue()))
+    		.andExpect(jsonPath("title").value(bookTo.getTitle()))
+    		.andExpect(jsonPath("authors").value(bookTo.getAuthors()));
     }
 }
