@@ -20,17 +20,17 @@ public class BookRestService {
         return bookService.findBooksByTitle(titlePrefix);
     }
 
-    @RequestMapping(value = "/book", method = RequestMethod.POST, params="save")
+    @RequestMapping(value = "/book", method = RequestMethod.POST, params="action=save")
     public BookTo saveBook(@RequestBody BookTo book) {
         return bookService.saveBook(book);
     }
     
-    @RequestMapping(value = "/book", method = RequestMethod.PATCH, params="update")
+    @RequestMapping(value = "/book", method = RequestMethod.PATCH, params="action=update")
     public BookTo updateBook(@RequestBody BookTo book) {
     	return bookService.updateBook(book);
     }
     
-    @RequestMapping(value = "/book", method = RequestMethod.DELETE, params="delete")
+    @RequestMapping(value = "/book", method = RequestMethod.DELETE, params="action=delete")
     public BookTo deleteBook(@RequestBody BookTo book) {
     	return bookService.deleteBook(book);
     }
