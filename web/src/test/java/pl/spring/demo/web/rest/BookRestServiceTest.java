@@ -80,7 +80,7 @@ public class BookRestServiceTest {
     	BookTo bookTo = new BookTo(5L, "Piąta książka", "Zbigniew Nowak");
     	Mockito.when(bookService.saveBook(bookTo)).thenReturn(bookTo);
         // when
-        ResultActions response = this.mockMvc.perform(post("/book").param("save", "" )
+        ResultActions response = this.mockMvc.perform(post("/book").param("action", "save" )
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json.getBytes()));
@@ -99,7 +99,7 @@ public class BookRestServiceTest {
     	BookTo bookTo = new BookTo(2L, "Druga książka", "Zbigniew Nowak");
     	// when
     	Mockito.when(bookService.deleteBook(bookTo)).thenReturn(bookTo);
-    	ResultActions response = this.mockMvc.perform(delete("/book").param("delete", "" )
+    	ResultActions response = this.mockMvc.perform(delete("/book").param("action", "delete" )
     			.accept(MediaType.APPLICATION_JSON)
     			.contentType(MediaType.APPLICATION_JSON)
     			.content(json.getBytes()));
@@ -119,7 +119,7 @@ public class BookRestServiceTest {
     	BookTo bookTo = new BookTo(2L, "Druga książka", "Zbigniew Zbigniew");
     	// when
     	Mockito.when(bookService.updateBook(bookTo)).thenReturn(bookTo);
-    	ResultActions response = this.mockMvc.perform(patch("/book").param("update", "" )
+    	ResultActions response = this.mockMvc.perform(patch("/book").param("action", "update" )
     			.accept(MediaType.APPLICATION_JSON)
     			.contentType(MediaType.APPLICATION_JSON)
     			.content(json.getBytes()));
