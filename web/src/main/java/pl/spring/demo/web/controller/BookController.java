@@ -23,7 +23,7 @@ public class BookController {
         params.put("books", allBooks);
         return "bookList";
     }
-    @RequestMapping(value = "/deleteBook", method = RequestMethod.POST, params = "action=delete")
+    @RequestMapping(value = "/deleteBook", method = RequestMethod.GET)
     public String deleteBook(Map<String, Object> parameters,@RequestParam("id") String id) {
     	BookTo deleteBook = bookService.deleteBook(Long.valueOf(id));
     	if (deleteBook !=null) {
