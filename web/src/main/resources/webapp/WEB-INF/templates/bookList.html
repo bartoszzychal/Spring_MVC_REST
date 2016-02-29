@@ -1,10 +1,17 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://thymeleaf.org">
 <head lang="en">
 <meta charset="UTF-8" />
 <title>Lista książek</title>
-<link rel="stylesheet" th:href="@{/static/application.css}"
-	href="/static/application.css" />
+<link rel="stylesheet" th:href="@{/static/application.css}" href="/static/application.css" />
+
+<script type="text/javascript">
+	var auto = setInterval(function() {
+		window.location.reload(true);
+	}, 5000);
+</script>
+
 </head>
 <body>
 	<table id="table_style">
@@ -17,19 +24,19 @@
 			</tr>
 		</thead>
 		<tbody>
-		<div th:each="book : ${books}">
-		<tr>
-			<td class="center" th:text="${book.id}">id</td>
-			<td class="center" th:text="${book.title}">title</td>
-			<td class="center" th:text="${book.authors}">authors</td>
-			<td>
-				<form action="#" data-th-action="@{'/deleteBook/'+${book.id}}" method="get">
-					<button type="submit" >Delete book</button>
-				</form>
-			</td>
+			<div th:each="book : ${books}">
+				<tr>
+					<td class="center" th:text="${book.id}">id</td>
+					<td class="center" th:text="${book.title}">title</td>
+					<td class="center" th:text="${book.authors}">authors</td>
+					<td>
+						<form th:action="@{'/deleteBook/'+${book.id}}" method="get">
+							<button type="submit">Delete book</button>
+						</form>
+					</td>
 
-		</tr>
-		</div>
+				</tr>
+			</div>
 		</tbody>
 	</table>
 

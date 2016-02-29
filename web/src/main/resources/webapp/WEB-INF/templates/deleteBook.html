@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
 <head lang="en">
-    <meta charset="UTF-8" />
-    <title>Usunieta ksiązka</title>
-    <link rel="stylesheet" th:href="@{/static/application.css}" href="/static/application.css" />
+<meta charset="UTF-8" />
+<title>Usunieta ksiązka</title>
+<link rel="stylesheet" th:href="@{/static/application.css}" href="/static/application.css" />
 </head>
 <body>
-    <p id="delete_alert" th:inline="text">Książka o tytule "[[${title}]]" została usunięta.</p>
-    <form action="#" data-th-action="@{/books}" method="get">
-			<button id="return_button" type="submit" name="" value="">Return to book's list</button>
+	<p id="delete_alert" th:inline="text">
+		Książka o tytule <b>"[[${title}]]"</b> została usunięta.
+	</p>
+	<form action="#" data-th-action="@{/books}" method="get">
+		<button id="return_button" type="submit" name="" value="">Return to book's list</button>
 	</form>
 </body>
 </html>
