@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,8 +24,8 @@ public class BookController {
         params.put("books", allBooks);
         return "bookList";
     }
-    @RequestMapping(value = "/deleteBook", method = RequestMethod.GET)
-    public String deleteBook(Map<String, Object> parameters,@RequestParam("id") String id) {
+    @RequestMapping(value = "/deleteBook/{id}", method = RequestMethod.GET)
+    public String deleteBook(Map<String, Object> parameters,@PathVariable("id") String id) {
     	BookTo deleteBook = bookService.deleteBook(Long.valueOf(id));
     	if (deleteBook !=null) {
     		parameters.put("title", deleteBook.getTitle());
