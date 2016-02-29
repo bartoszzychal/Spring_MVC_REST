@@ -23,8 +23,8 @@
 			<td class="center" th:text="${book.title}">title</td>
 			<td class="center" th:text="${book.authors}">authors</td>
 			<td>
-				<form action="#" data-th-action="@{'/deleteBook'}" method="get">
-					<button type="submit" name="id" th:value="@{${book.id}}">Delete book</button>
+				<form action="#" data-th-action="@{'/deleteBook/'+${book.id}}" method="get">
+					<button type="submit" >Delete book</button>
 				</form>
 			</td>
 
