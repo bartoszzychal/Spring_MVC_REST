@@ -2,18 +2,31 @@
 	color: red;
 }
 
-#table_style {
+#header {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	background-color: #435485;
+	color: white;
+	text-shadow: 2px 2px black;
+	text-align: center;
+	padding: 5px;
+}
+
+#table_ {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 	font-size: 14px;
 	background: #fff;
 	width: 800px;
 	border-collapse: collapse;
 	text-align: center;
-	margin-left: auto;
-	margin-right: auto; 
 }
 
-#table_style 
+#table_div{
+	float: left;
+	width: 59%;
+	margin-left: 5px;
+}
+
+#table_ 
 th {
 	font-size: 16px;
 	font-weight: normal;
@@ -22,24 +35,24 @@ th {
 	border-bottom: 2px solid #6678b1;
 }
 
-#table_style 
+#table_ 
 td {
 	border-bottom: 1px solid #ccc;
 	color: #669;
 	padding: 6px 8px;
 }
 
-#table_style
+#table_
 td.center {
 	border-right: 1px solid #ccc;
 }
 
-#table_style 
+#table_ 
 tbody tr:hover td {
 	color: #010;
 }
 
-#table_style 
+#table_ 
 button {
 	background: #e83131;
 	background-image: -webkit-linear-gradient(top, #e83131, #fc0000);
@@ -47,6 +60,10 @@ button {
 	background-image: -ms-linear-gradient(top, #e83131, #fc0000);
 	background-image: -o-linear-gradient(top, #e83131, #fc0000);
 	background-image: linear-gradient(to bottom, #e83131, #fc0000);
+	-webkit-transition-duration: 0.5s;
+	transition-duration: 0.5s;
+	-webkit-transition-property: transform;
+	transition-property: transform;
 	-webkit-border-radius: 7;
 	-moz-border-radius: 7;
 	border-radius: 7px;
@@ -59,8 +76,10 @@ button {
 	text-decoration: none;
 }
 
-#table_style
+#table_
 button:hover {
+	-webkit-transform: scale(1.05);
+	transform: scale(1.05);
 	background: #e83131;
 	background-image: -webkit-linear-gradient(top, #e83131, #e83131);
 	background-image: -moz-linear-gradient(top, #e83131, #e83131);
@@ -70,29 +89,129 @@ button:hover {
 	text-decoration: none;
 }
 
-button#return_button {
+#search {
+	background-color: #eeeeee;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	text-align: center;
+	padding: 5px;
+	float: left;
+	width: 40%;
+}
+
+#search_table {
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 16px;
+	font-weight: normal;
+	padding: 10px 8px;
+}
+
+.button_search, .button_all {
+	-webkit-transition-duration: 0.5s;
+	transition-duration: 0.5s;
+	-webkit-transition-property: transform;
+	transition-property: transform;
 	-webkit-border-radius: 10;
 	-moz-border-radius: 10;
 	border-radius: 10px;
 	font-family: Arial;
 	color: #ffffff;
 	font-size: 20px;
-	background: #3dc22e;
 	padding: 10px 20px 10px 20px;
 	text-decoration: none;
-	position: absolute;
-	right: 20px;
 }
 
-button:hover#return_button {
-	background: #2e9421;
+.button_search:hover, .button_all:hover {
+	-webkit-transform: scale(1.05);
+	transform: scale(1.05);
 	text-decoration: none;
-
+}
+.button_search {
+	background: #0080ff;
 }
 
-p#delete_alert {
+.button_all {
+	margin: 20px; 
+	right: 20px;
+	float: right;
+	background: #34a327;
+}
+
+#title {
+	color: black;
+	text-shadow: 0px 0px;
+}
+
+input[type=text] {
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+input[type=text]:focus {
+    border-color:#333;
+}
+input[type=text]:HOVER {
+    border-color:#8f8f8f;
+}
+
+button#return_button {
+	-webkit-transition-duration: 0.5s;
+	transition-duration: 0.5s;
+	-webkit-transition-property: transform;
+	transition-property: transform;
+	-webkit-border-radius: 10;
+	-moz-border-radius: 10;
+	border-radius: 10px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 20px;
+	background: #34a327;
+	margin-right: 10px;
+	padding: 10px 20px 10px 20px;
+	text-decoration: none;
+	right: 10px;
+	float: right;
+}
+
+button:hover#return_button, .button_ok {
+	-webkit-transform: scale(1.05);
+	transform: scale(1.05);
+	text-decoration: none;
+}
+
+#return_button_div {
+	padding: 10px;
+}
+
+#delete_alert_div {
+	background-color: #fa9386;
+	background-position: absolute;
+	top: 0%;
+	height: 100px;
+	padding: 2px;
+	border: groove;
+	border-color: #f85a49;
+	border-radius: 6px;
+}
+
+#delete_alert {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	text-shadow: 2px 2px black;
 	font-size: 30px;
-	background: #fff;
+	color: white;
 	text-align: center;
+}
+
+#footer {
+    background-color:black;
+    bottom:0%;
+    width:100%;
+    left: 0;
+    position:absolute;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px; 
 }

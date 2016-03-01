@@ -4,41 +4,86 @@
 <head lang="en">
 <meta charset="UTF-8" />
 <title>Lista książek</title>
-<link rel="stylesheet" th:href="@{/static/application.css}" href="/static/application.css" />
+<link rel="stylesheet" th:href="@{/static/application.css}"
+	href="/static/application.css" />
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	var auto = setInterval(function() {
 		window.location.reload(true);
 	}, 5000);
-</script>
+</script> -->
 
 </head>
 <body>
-	<table id="table_style">
-		<thead>
-			<tr>
-				<th scope="col">ID</th>
-				<th scope="col">TITLE</th>
-				<th scope="col">AUTHORS</th>
-				<th scope="col">DELETE</th>
-			</tr>
-		</thead>
-		<tbody>
-			<div th:each="book : ${books}">
-				<tr>
-					<td class="center" th:text="${book.id}">id</td>
-					<td class="center" th:text="${book.title}">title</td>
-					<td class="center" th:text="${book.authors}">authors</td>
-					<td>
-						<form th:action="@{'/deleteBook/'+${book.id}}" method="get">
-							<button type="submit">Delete book</button>
-						</form>
-					</td>
 
+	<div id="header">
+		<h1>Book list</h1>
+	</div>	
+	
+		<div class="container" id="search">
+			<form action="#" th:action="@{/books}" method="post">
+				<table id="search_table">
+					<tr>
+						<th colspan="2">
+							<h3>Wyszukaj ksiazke:</h3>
+						</th>
+					</tr>
+					<tr>
+						<th><label for="title" placeholder="title">Title</label></th>
+						<th><label for="authors">Authors</label></th>
+						<th rowspan="3">
+							<button class="button_all" type="submit" formmethod="get">All</button>
+						</th>
+					</tr>
+					<tr>
+						<td><input type="text" th:value="${title}" id="title"
+							placeholder="title" name="title" /></td>
+						<td><input type="text" th:value="${authors}" id="authors"
+							placeholder="authors" name="authors" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><button class="button_search" type="submit">Search</button></td>
+					</tr>
+
+
+				</table>
+			</form>
+		</div>
+
+	<div id="table_div">
+		<table id="table_">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">TITLE</th>
+					<th scope="col">AUTHORS</th>
+					<th scope="col">DELETE</th>
 				</tr>
-			</div>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<div th:each="book : ${books}">
+					<tr>
+						<td class="center" th:text="${book.id}">id</td>
+						<td class="center" th:text="${book.title}">title</td>
+						<td class="center" th:text="${book.authors}">authors</td>
+						<td>
+							<form th:action="@{'/deleteBook/'+${book.id}}" method="get">
+								<button type="submit">Delete book</button>
+							</form>
+						</td>
+
+					</tr>
+				</div>
+			</tbody>
+		</table>
+	</div>
+
+
+
+
+
+
+	<div id="footer">Copyright © Bartosz Zychal</div>
 
 </body>
 </html>

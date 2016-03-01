@@ -3,14 +3,23 @@
 <head lang="en">
 <meta charset="UTF-8" />
 <title>Usunieta ksiązka</title>
-<link rel="stylesheet" th:href="@{/static/application.css}" href="/static/application.css" />
+<link rel="stylesheet" th:href="@{/static/application.css}"
+	href="/static/application.css" />
 </head>
 <body>
-	<p id="delete_alert" th:inline="text">
-		Książka o tytule <b>"[[${title}]]"</b> została usunięta.
-	</p>
-	<form action="#" data-th-action="@{/books}" method="get">
-		<button id="return_button" type="submit" name="" value="">Return to book's list</button>
-	</form>
+	<div id="delete_alert_div">
+		<p id="delete_alert" th:inline="text">
+			Książka o tytule <b id="title">"[[${title}]]"</b> została usunięta.
+		</p>
+	</div>
+
+	<div id="return_button_div">
+		<form action="#" data-th-action="@{/books}" method="get">
+			<button id="return_button" type="submit" name="" value="">Return
+				to book's list</button>
+		</form>
+	</div>
+	<div id="footer">Copyright © Bartosz Zychal</div>
+
 </body>
 </html>
