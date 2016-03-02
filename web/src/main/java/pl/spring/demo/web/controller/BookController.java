@@ -20,18 +20,18 @@ public class BookController {
     private BookService bookService;
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
-    public String bookList(Map<String, Object> params,
-    		@ModelAttribute("title") String title,
-    		@ModelAttribute("authors") String authors) {
+    public String bookList(Map<String, Object> params, @ModelAttribute("title") String title,
+    						@ModelAttribute("authors") String authors) {
+        
         final List<BookTo> allBooks = bookService.findAllBooks();
         params.put("books", allBooks);
         return "bookList";
     }
     
     @RequestMapping(value = "/books", method = RequestMethod.POST)
-    public String bookListByTitle(Map<String, Object> params,
-    		@ModelAttribute("title") String title,
-    		@ModelAttribute("authors") String authors) {
+    public String bookListByTitle(Map<String, Object> params, @ModelAttribute("title") String title,
+    								@ModelAttribute("authors") String authors) {
+    	
     	List<BookTo> bookByTitle= null;
     	if(!title.isEmpty()&&!authors.isEmpty()){
     		  bookByTitle = bookService.findBooksByTitleAndByAuthors(title,authors);
