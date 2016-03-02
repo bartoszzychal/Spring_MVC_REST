@@ -97,14 +97,17 @@ public class BookRestServiceTest {
     	File file = FileUtils.getFileFromClasspath("classpath:pl/spring/demo/web/json/bookToDelete.json");
     	String json = FileUtils.readFileToString(file);
     	BookTo bookTo = new BookTo(2L, "Druga książka", "Zbigniew Nowak");
+    	BookTo bookTo2 = new BookTo(3L, "Trzecia książka", "Zbigniew Nowak");
     	// when
     	Mockito.when(bookService.deleteBook(bookTo)).thenReturn(bookTo);
+    	bookService.deleteBook(bookTo2);
     	ResultActions response = this.mockMvc.perform(delete("/book").param("action", "delete" )
     			.accept(MediaType.APPLICATION_JSON)
     			.contentType(MediaType.APPLICATION_JSON)
     			.content(json.getBytes()));
     	// then
-    	Mockito.verify(bookService).deleteBook(bookTo);
+//    	Mockito.verify(bookService).deleteBook(bookTo);
+    	Mockito.verify(bookService).deleteBook(bookTo2);
     	response.andExpect(status().isOk())
     		.andExpect(jsonPath("id").value(bookTo.getId().intValue()))
     		.andExpect(jsonPath("title").value(bookTo.getTitle()))
