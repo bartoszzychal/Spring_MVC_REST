@@ -30,14 +30,7 @@ public class BookController {
     public String bookListByTitle(Map<String, Object> params,final @ModelAttribute("title") String title,
     								final @ModelAttribute("authors") String authors) {
     	
-    	List<BookTo> bookByTitle= null;
-    	if(!title.isEmpty()&&!authors.isEmpty()){
-    		  bookByTitle = bookService.findBooksByTitleAndByAuthors(title,authors);
-    	}else if(!title.isEmpty()){
-  		  bookByTitle = bookService.findBooksByTitle(title);
-    	}else if(!authors.isEmpty()){
-    		bookByTitle = bookService.findBooksByAuthor(authors);
-    	}
+    	final List<BookTo> bookByTitle= bookService.findBooks(title, authors);
     	params.put("books", bookByTitle);
     	return "bookList";
     	

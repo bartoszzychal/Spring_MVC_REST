@@ -15,78 +15,82 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class BookServiceImpl implements BookService {
 
-    @Autowired
-    private BookRepository bookRepository;
+	@Autowired
+	private BookRepository bookRepository;
 
-    @Override
-    public List<BookTo> findAllBooks() {
-        return BookMapper.map2To(bookRepository.findAll());
-    }
-
-    @Override
-    public List<BookTo> findBooksByTitle(String title) {
-        return BookMapper.map2To(bookRepository.findBookByTitle(title));
-    }
-
-    @Override
-    public List<BookTo> findBooksByAuthor(String author) {
-        return BookMapper.map2To(bookRepository.findBookByAuthor(author));
-    }
-    
 	@Override
-	public List<BookTo> findBooksByTitleAndByAuthors(String title, String authors) {
-		return BookMapper.map2To(bookRepository.findBookByTitleAndByAuthors(title,authors));
+	public List<BookTo> findAllBooks() {
+		return BookMapper.map2To(bookRepository.findAll());
 	}
-    
 
-    @Override
-    @Transactional(readOnly = false)
-    public BookTo saveBook(BookTo book) {
-        BookEntity entity = BookMapper.map(book);
-        entity = bookRepository.save(entity);
-        return BookMapper.map(entity);
-    }
+	@Override
+	public List<BookTo> findBooksByTitle(String title) {
+		return BookMapper.map2To(bookRepository.findBookByTitle(title));
+	}
 
-    @Override
-    @Transactional
-    public BookTo deleteBook(Long id) {
-    	BookEntity book = null;
-    	if(id!=null && bookRepository.exists(id)){
-    		book = bookRepository.getOne(id);
-    		bookRepository.delete(book);
-    	}
-    	return BookMapper.map(book);
-    }
-    
-    @Override
-    @Transactional
-    public BookTo deleteBook(BookTo bookTo) {
-    	BookEntity bookEntity = BookMapper.map(bookTo);
-    	Long id = bookEntity.getId();
-		if(id!=null && 
-				bookRepository.exists(id) &&
-				bookRepository.getOne(id).equals(bookEntity)){
-			
-    		bookRepository.delete(bookEntity);
-    		return bookTo;
-    		
-    	}
-    	return null;
-    }
+	@Override
+	public List<BookTo> findBooksByAuthor(String author) {
+		return BookMapper.map2To(bookRepository.findBookByAuthor(author));
+	}
+
+	@Override
+	public List<BookTo> findBooks(String title, String authors) {
+		List<BookEntity> findBook = null;
+		if (!title.isEmpty() && !authors.isEmpty()) {
+			findBook = bookRepository.findBookByTitleAndByAuthors(title, authors);
+		} else if (!title.isEmpty()) {
+			findBook = bookRepository.findBookByTitle(title);
+		} else if (!authors.isEmpty()) {
+			findBook = bookRepository.findBookByAuthor(authors);
+		}
+		return BookMapper.map2To(findBook);
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public BookTo saveBook(BookTo book) {
+		BookEntity entity = BookMapper.map(book);
+		entity = bookRepository.save(entity);
+		return BookMapper.map(entity);
+	}
+
+	@Override
+	@Transactional
+	public BookTo deleteBook(Long id) {
+		BookEntity book = null;
+		if (id != null && bookRepository.exists(id)) {
+			book = bookRepository.getOne(id);
+			bookRepository.delete(book);
+		}
+		return BookMapper.map(book);
+	}
+
+	@Override
+	@Transactional
+	public BookTo deleteBook(BookTo bookTo) {
+		BookEntity bookEntity = BookMapper.map(bookTo);
+		Long id = bookEntity.getId();
+		if (id != null && bookRepository.exists(id) && bookRepository.getOne(id).equals(bookEntity)) {
+
+			bookRepository.delete(bookEntity);
+			return bookTo;
+
+		}
+		return null;
+	}
 
 	@Override
 	@Transactional
 	public BookTo updateBook(BookTo bookTo) {
-    	Long id = bookTo.getId();
-    	BookEntity bookEntity = null;
-    	if(id!=null && bookRepository.exists(id)){
-    		bookEntity = bookRepository.findOne(id);
+		Long id = bookTo.getId();
+		BookEntity bookEntity = null;
+		if (id != null && bookRepository.exists(id)) {
+			bookEntity = bookRepository.findOne(id);
 			bookEntity.setAuthors(bookTo.getAuthors());
-    		bookEntity.setTitle(bookTo.getTitle());
-    		bookEntity = bookRepository.getOne(id);
-    	}
+			bookEntity.setTitle(bookTo.getTitle());
+			bookEntity = bookRepository.getOne(id);
+		}
 		return bookEntity == null ? bookTo : BookMapper.map(bookEntity);
 	}
-	
-    
+
 }
