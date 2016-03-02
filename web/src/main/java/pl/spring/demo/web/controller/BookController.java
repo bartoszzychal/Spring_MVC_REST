@@ -27,8 +27,8 @@ public class BookController {
     }
     
     @RequestMapping(value = "/books", method = RequestMethod.POST)
-    public String bookListByTitle(Map<String, Object> params, @ModelAttribute("title") String title,
-    								@ModelAttribute("authors") String authors) {
+    public String bookListByTitle(Map<String, Object> params,final @ModelAttribute("title") String title,
+    								final @ModelAttribute("authors") String authors) {
     	
     	List<BookTo> bookByTitle= null;
     	if(!title.isEmpty()&&!authors.isEmpty()){
