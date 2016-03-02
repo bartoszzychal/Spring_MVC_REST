@@ -20,9 +20,7 @@ public class BookController {
     private BookService bookService;
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
-    public String bookList(Map<String, Object> params, @ModelAttribute("title") String title,
-    						@ModelAttribute("authors") String authors) {
-        
+    public String bookList(Map<String, Object> params) {
         final List<BookTo> allBooks = bookService.findAllBooks();
         params.put("books", allBooks);
         return "bookList";

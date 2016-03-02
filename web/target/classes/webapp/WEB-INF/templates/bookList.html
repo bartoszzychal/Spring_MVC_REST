@@ -7,18 +7,14 @@
 <link rel="stylesheet" th:href="@{/static/application.css}"
 	href="/static/application.css" />
 
-<!-- <script type="text/javascript">
-	var auto = setInterval(function() {
-		window.location.reload(true);
-	}, 5000);
-</script> -->
-
 </head>
 <body>
 
 	<div id="header">
 		<h1>Book list</h1>
-	</div>	
+	</div>
+	
+	<div id="search_block">
 	
 		<div class="container" id="search">
 			<form action="#" th:action="@{/books}" method="post">
@@ -31,9 +27,6 @@
 					<tr>
 						<th><label for="title" placeholder="title">Title</label></th>
 						<th><label for="authors">Authors</label></th>
-						<th rowspan="3">
-							<button class="button_all" type="submit" formmethod="get">All</button>
-						</th>
 					</tr>
 					<tr>
 						<td><input type="text" th:value="${title}" id="title"
@@ -49,6 +42,15 @@
 				</table>
 			</form>
 		</div>
+		
+		<div class="container" id="all_books">
+			<form action="#" th:action="@{/books}" method="get">
+				<button class="button_all" type="submit">All books</button>
+			</form>
+		</div>
+		
+	</div>
+
 
 	<div id="table_div">
 		<table id="table_">
