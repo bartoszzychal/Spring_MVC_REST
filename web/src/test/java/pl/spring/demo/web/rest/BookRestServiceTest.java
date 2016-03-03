@@ -122,6 +122,5 @@ public class BookRestServiceTest {
 		// then
     	Mockito.verify(bookService).updateBook(Matchers.any(BookTo.class));
     	response.andExpect(status().isOk());
-    	Integer
     }
 }
